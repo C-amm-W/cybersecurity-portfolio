@@ -6,4 +6,4 @@ Fence Wizard is an internal business platform that required stronger access gove
 
 ## Problem
 
-As
+As the platform expanded, role labels alone were insufficient for managing authorization decisions

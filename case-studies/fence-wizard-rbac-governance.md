@@ -27,10 +27,11 @@ As the platform expanded, role labels alone were insufficient for managing autho
 - Audit logging for access changes.
 - Permission-gated navigation and workflow visibility.
 - Restricted access to sensitive customer search and inventory actions.
+- Permission-gated admin password reset email workflow for controlled account recovery.
 
 ## Evidence Notes
 
-Recent repository evidence supports the RBAC story through permission-gated navigation, restricted customer search, restricted bulk inventory edits, protected analytics access, and authenticated API enforcement. The public portfolio keeps this evidence at the control level rather than publishing private company implementation details.
+Recent repository evidence supports the RBAC story through permission-gated navigation, restricted customer search, restricted bulk inventory edits, protected analytics access, authenticated API enforcement, and controlled administrator-assisted account recovery. The public portfolio keeps this evidence at the control level rather than publishing private company implementation details.
 
 ## Governance Features
 

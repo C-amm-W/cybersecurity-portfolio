@@ -22,6 +22,7 @@ A system can have strong access controls and still be difficult to govern if imp
 - Human-readable labels in audit UI and exports.
 - Audit rows for test data and administrative actions.
 - Metadata-rich event patterns for notifications and workflow events.
+- Password reset telemetry patterns for reset requests, admin-triggered resets, and rate-limit abuse events.
 - Documentation framing audit data as future detection telemetry.
 
 ## Security Value

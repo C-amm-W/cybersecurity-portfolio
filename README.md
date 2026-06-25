@@ -27,6 +27,7 @@ The goal is to show practical proof-of-work beyond tool familiarity: secure desi
 |---|---|
 | [Fence Wizard RBAC Governance](case-studies/fence-wizard-rbac-governance.md) | Database-driven RBAC, permissions, authorization enforcement |
 | [Secure API Authorization](case-studies/secure-api-authorization.md) | Authenticated sessions, API route protection, customer and business data safeguards |
+| [Password Reset Hardening](case-studies/password-reset-hardening.md) | Account recovery security, rate limiting, reset-token handling, audit telemetry |
 | [Microsoft SSO and Secure App Handoff](case-studies/microsoft-sso-secure-handoff.md) | Identity flow reliability, callback handling, inter-app trust boundaries |
 | [Compass Audit and Privacy Architecture](case-studies/compass-audit-privacy-architecture.md) | Audit logs, access requests, anonymized reviews, transcript encryption, data minimization |
 | [Human-Governed AI Engineering Triage](case-studies/human-governed-ai-engineering-triage.md) | AI triage, duplicate detection, security escalation, plan-only automation, human approval |

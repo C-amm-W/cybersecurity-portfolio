@@ -2,7 +2,7 @@
 
 ## Strategic Focus
 
-This portfolio documents hands-on cybersecurity work focused on governance-aware security engineering, access-control architecture, secure application design, audit logging, identity governance, privacy-aware AI workflows, and detection engineering foundations.
+This portfolio documents hands-on cybersecurity work focused on governance-aware security engineering, access-control architecture, secure application design, audit logging, identity governance, privacy-aware AI workflows, adversarial review, and detection engineering foundations.
 
 The goal is to show practical proof-of-work beyond tool familiarity: secure design decisions, authorization enforcement, operational risk reduction, adversarial review, documentation discipline, and telemetry that can support future detection engineering.
 
@@ -41,6 +41,15 @@ The goal is to show practical proof-of-work beyond tool familiarity: secure desi
 | [Break-Glass Admin Access](case-studies/break-glass-admin-access.md) | Emergency privileged access, logging, review/rotation |
 | [Access-Control Regression Checklist](case-studies/access-control-regression-checklist.md) | Secure change review, authorization validation |
 | [Audit Logging and Telemetry Design](case-studies/audit-logging-telemetry-design.md) | Security decisions, administrative events, workflow history, detection-ready logging |
+
+## Architecture and Assurance Documentation
+
+| Document | Purpose |
+|---|---|
+| [Current Identity and Authorization Architecture](docs/current-identity-authorization-architecture.md) | End-to-end authentication, provisioning, authorization, privacy, state, and audit flow |
+| [Authorization Assurance Matrix](docs/authorization-assurance-matrix.md) | Connect common access-control risks to safeguards, validation, and evidence |
+| [Fence Wizard RBAC Security Hardening](fence-wizard-rbac-security-hardening/README.md) | Current implementation state and ongoing authorization assurance program |
+| [Role Permission Simulation Lab](labs/role-permission-simulation/README.md) | Sanitized multi-layer authorization scenarios, attack cases, and test plan |
 
 ## Control Mappings
 

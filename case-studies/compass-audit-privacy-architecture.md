@@ -1,5 +1,17 @@
 # Compass Audit and Privacy Architecture Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Compass |
+| Case-study status | Implemented in reviewed workflows |
+| Evidence level | `PRIVATE_IMPLEMENTATION_SANITIZED_EVIDENCE` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized privacy and authorization review |
+| Known limitations | No private schema, employee record, prompt, or provider configuration is public. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 Compass is an internal review and 1:1 platform with security-relevant requirements around confidentiality, anonymized review flows, access requests, audit events, manager visibility, application provisioning, and privacy-preserving AI-assisted workflows.
@@ -23,7 +35,13 @@ The key risk is not only unauthorized entry into the application. It is also ove
 - Protect AI-assisted 1:1 workflows with encryption and data minimization.
 - Reduce object-probing and metadata-disclosure risks.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Anonymous reviewer submission model.
 - Review cycles with controlled open and closed states.
@@ -63,7 +81,7 @@ AI-assisted workflows use server-side calls, encrypted records, temporary audio 
 
 This work demonstrates privacy-aware application security. The focus is not only whether a feature works or whether a route is authenticated, but whether each user receives the minimum information required for their role and whether sensitive workflow context remains compartmentalized.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Improved confidence in HR-style review and 1:1 workflows.
 - Reduced unnecessary exposure of employee records and manager context.
@@ -72,14 +90,21 @@ This work demonstrates privacy-aware application security. The focus is not only
 - Established reusable privacy patterns for AI-assisted internal tools.
 - Reduced the risk of metadata leakage and identifier-based probing.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: Audit logging and governance workflows.
-- Phase 0: Identity and access governance.
-- Phase 0: Operational controls and application security.
-- Phase 1 preview: Cloud-integrated application security.
-- Phase 3 preview: AI security and privacy-aware AI workflow design.
+Sanitized privacy and authorization review. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. No private schema, employee record, prompt, or provider configuration is public.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 The public case study describes the security architecture and privacy controls without exposing employee data, private repository code, internal prompts, storage identifiers, access tokens, or business records.

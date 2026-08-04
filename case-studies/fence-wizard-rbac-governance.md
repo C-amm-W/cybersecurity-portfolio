@@ -1,5 +1,17 @@
 # Fence Wizard RBAC Governance Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Fence Wizard |
+| Case-study status | Implemented; ongoing validation |
+| Evidence level | `ONGOING_VALIDATION` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized implementation review and regression summary |
+| Known limitations | Public repository does not contain proprietary migrations, routes, or production tests. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 Fence Wizard is an internal multi-department business platform that required stronger access governance as more workflows, roles, applications, and sensitive operational functions were added. The RBAC effort evolved from a foundational role-and-permission model into a broader production authorization-hardening program.
@@ -29,7 +41,13 @@ The security risks included:
 - Improve accountability through auditable access changes.
 - Build reusable authorization patterns for additional internal applications.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Database-driven RBAC architecture with a canonical permission registry.
 - Multi-role permission resolution rather than relying only on one legacy role value.
@@ -82,7 +100,7 @@ The public portfolio describes the control design and outcomes without copying p
 - Intentionally public or service-facing routes are documented as exceptions.
 - Application provisioning decisions can be reviewed separately from feature permissions.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Reduced authorization ambiguity across departments and workflows.
 - Lowered the risk of accidental access to customer, operational, inventory, and administrative data.
@@ -91,13 +109,21 @@ The public portfolio describes the control design and outcomes without copying p
 - Established a stronger foundation for future access reviews and compliance evidence.
 - Created reusable identity and authorization architecture for connected internal tools.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: RBAC hardening and authorization enforcement.
-- Phase 0: Governance workflows and operational controls.
-- Phase 0: AppSec foundations.
-- Phase 1 preview: Identity-aware cloud and application security.
+Sanitized implementation review and regression summary. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. Public repository does not contain proprietary migrations, routes, or production tests.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Lessons Learned
 
 Authorization maturity requires more than creating roles. It requires authoritative backend enforcement, migration away from legacy assumptions, documented trust boundaries, regression testing, and governance around exceptions and privileged changes.

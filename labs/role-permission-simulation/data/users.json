@@ -1,0 +1,5 @@
+[
+  {"id":"syn_user_reader","roleIds":["reader"],"provisionedApps":["demo_app"]},
+  {"id":"syn_user_multi","roleIds":["operator","auditor"],"provisionedApps":["demo_app"]},
+  {"id":"syn_user_disabled","roleIds":["reader"],"provisionedApps":[]}
+]

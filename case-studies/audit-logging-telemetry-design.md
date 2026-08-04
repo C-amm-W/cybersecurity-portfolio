@@ -1,5 +1,17 @@
 # Audit Logging and Telemetry Design Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Fence Wizard and connected workflows |
+| Case-study status | Ongoing validation |
+| Evidence level | `ONGOING_VALIDATION` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized schema and event-category review |
+| Known limitations | No production log export or deployed detection is included. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 This case study documents audit logging and telemetry design used to make internal platform activity more reviewable, explainable, and detection-ready.
@@ -64,7 +76,13 @@ The design needed to support multiple audiences:
 - Assignment failures caused by missing eligible users.
 - Security-sensitive upload validation failures.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Centralized audit-event foundation for access and workflow activity.
 - Human-readable labels in audit interfaces and exports.
@@ -99,7 +117,7 @@ Audit logs should help answer:
 
 This supports incident review, compliance evidence, access governance, and future detection engineering.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Improved administrative accountability.
 - Better evidence for access reviews and security documentation.
@@ -108,13 +126,21 @@ This supports incident review, compliance evidence, access governance, and futur
 - Reduced risk of misleading audit trails during failed or concurrent updates.
 - More understandable audit exports for technical and non-technical stakeholders.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: Audit logging and operational controls.
-- Phase 0: Security dashboards and operational writeups.
-- Phase 1 preview: Cloud logging and identity-abuse visibility.
-- Phase 2 preview: Detection engineering, alert logic, and threat hunting.
+Sanitized schema and event-category review. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. No production log export or deployed detection is included.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 The public case study describes event categories, control patterns, and security outcomes without exposing private schemas, employee data, customer information, secrets, or internal identifiers.

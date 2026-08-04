@@ -1,5 +1,10 @@
 # Fence Wizard RBAC Security Hardening
 
+> **Document status:** Current sanitized evidence hub.
+> **As of:** 2026-08-04
+> [Current Control Status](../docs/current-control-status.md) is authoritative; this page does not independently establish operating effectiveness.
+
+
 ## Overview
 
 This project documents the production security-hardening program for Fence Wizard, an internal business platform supporting multiple departments and workflows. The work evolved from an initial role-model redesign into a broader authorization assurance program covering multi-role RBAC, backend route protection, application provisioning, auditability, privacy boundaries, and regression validation.
@@ -62,7 +67,7 @@ flowchart TD
 | Field Filtering | Prevents lower-privilege users from receiving restricted metadata |
 | Audit Logging | Records security-sensitive decisions and changes |
 
-## Implemented Controls
+## Reported Controls and Evidence Basis
 
 ### Multi-Role RBAC
 
@@ -135,33 +140,13 @@ Recommended fields:
 | before | Previous state where practical |
 | after | New state where practical |
 
-## Current Assurance Checklist
+## Current Assurance Status
 
-### Implemented
-
-- [x] Multi-role RBAC model
-- [x] Effective permission resolution
-- [x] Backend authorization for sensitive routes
-- [x] Protected administrative role changes
-- [x] Audit events for access-control changes
-- [x] Application access separated from in-app authorization
-- [x] Resource ownership checks in reviewed modules
-- [x] Field-level privacy filtering in reviewed modules
-- [x] Guarded workflow transitions and stale-write checks
-- [x] Route inventories and authorization documentation
-
-### Ongoing
-
-- [ ] Continue authorization sweeps as new routes are added
-- [ ] Expand automated regression coverage for object-level authorization
-- [ ] Monitor override use and permission drift
-- [ ] Add detection logic for unusual role and administrative activity
-- [ ] Periodically validate application provisioning and offboarding behavior
-- [ ] Review new external portals for token, rate-limit, and state-transition safety
+The authoritative, dated control-family status is maintained in [Current Control Status](../docs/current-control-status.md). In summary, reviewed authorization controls are privately implemented with sanitized evidence and ongoing validation; public detection logic remains design-only. This page intentionally does not duplicate a mutable completion checklist.
 
 ## Detection Opportunities
 
-Potential detections based on the implemented telemetry:
+Potential detections that could be built from the documented telemetry foundation; these are design opportunities, not claims of deployed analytics:
 
 - Repeated authorization denials across sensitive routes
 - Sudden assignment of privileged roles

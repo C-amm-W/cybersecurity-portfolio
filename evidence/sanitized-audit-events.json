@@ -1,0 +1,16 @@
+{
+  "notice": "SYNTHETIC PORTFOLIO EXAMPLES — NOT PRODUCTION EXPORTS",
+  "generatedAsOf": "2026-08-04T00:00:00Z",
+  "events": [
+    {"eventId":"syn_evt_001","timestamp":"2026-08-04T00:00:01Z","eventType":"authorization_allowed","actorId":"syn_user_alpha","targetId":"syn_record_001","permission":"records.view","outcome":"allowed","reason":"role_grant"},
+    {"eventId":"syn_evt_002","timestamp":"2026-08-04T00:00:02Z","eventType":"authorization_denied","actorId":"syn_user_beta","targetId":"syn_record_001","permission":"records.manage","outcome":"denied","reason":"missing_permission"},
+    {"eventId":"syn_evt_003","timestamp":"2026-08-04T00:00:03Z","eventType":"role_assignment_changed","actorId":"syn_admin_001","targetId":"syn_user_beta","outcome":"completed","reason":"approved_access_change"},
+    {"eventId":"syn_evt_004","timestamp":"2026-08-04T00:00:04Z","eventType":"override_created","actorId":"syn_admin_001","targetId":"syn_user_beta","permission":"records.manage","outcome":"completed","reason":"time_limited_support"},
+    {"eventId":"syn_evt_005","timestamp":"2026-08-04T00:00:05Z","eventType":"override_expired","actorId":"syn_system","targetId":"syn_user_beta","permission":"records.manage","outcome":"completed","reason":"expiry_reached"},
+    {"eventId":"syn_evt_006","timestamp":"2026-08-04T00:00:06Z","eventType":"object_probe_denied","actorId":"syn_user_beta","targetId":"syn_unknown_object","permission":"records.view","outcome":"denied","reason":"not_found_or_not_authorized"},
+    {"eventId":"syn_evt_007","timestamp":"2026-08-04T00:00:07Z","eventType":"service_authentication_failed","actorId":"syn_service_portal","targetId":"syn_service_core","outcome":"denied","reason":"invalid_service_credential"},
+    {"eventId":"syn_evt_008","timestamp":"2026-08-04T00:00:08Z","eventType":"workflow_concurrency_conflict","actorId":"syn_user_alpha","targetId":"syn_workflow_001","permission":"workflow.transition","outcome":"conflict","reason":"stale_version"},
+    {"eventId":"syn_evt_009","timestamp":"2026-08-04T00:00:09Z","eventType":"portal_token_rejected","actorId":"syn_external_actor","targetId":"syn_portal_request","outcome":"denied","reason":"invalid_expired_revoked_or_unknown"},
+    {"eventId":"syn_evt_010","timestamp":"2026-08-04T00:00:10Z","eventType":"password_reset_rate_limited","actorId":"syn_request_scope","targetId":"syn_account_scope","outcome":"denied","reason":"synthetic_threshold_exceeded"}
+  ]
+}

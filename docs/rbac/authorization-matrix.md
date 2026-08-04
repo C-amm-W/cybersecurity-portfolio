@@ -1,8 +1,13 @@
 # Fence Wizard RBAC Authorization Matrix
 
-## Phase Mapping
+> **Document status:** Sanitized current policy baseline; implementation coverage is governed by [Current Control Status](../current-control-status.md).
+> **As of:** 2026-08-04
+> `Limited` entries require workflow-specific scope and must not be treated as unconditional grants.
 
-**Current Phase:** Phase 2 – Security Hardening
+
+## Status Authority
+
+Current implementation and validation status is maintained in [Current Control Status](../current-control-status.md). Legacy roadmap phases are not used as completion claims.
 
 ## What Are We Doing?
 
@@ -113,3 +118,7 @@ Expected behavior:
 | NIST AC-6 | Least privilege |
 | NIST AU-2 | Auditable events |
 | NIST AU-6 | Audit review |
+
+## Mapping Disclaimer
+
+Framework references are conceptual planning aids only, not an assessment, attestation, certification, audit result, or claim of control effectiveness.

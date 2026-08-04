@@ -1,0 +1,5 @@
+[
+  {"id":"reader","permissions":["records.view"]},
+  {"id":"operator","permissions":["records.view","records.manage"]},
+  {"id":"auditor","permissions":["records.view","audit.view"]}
+]

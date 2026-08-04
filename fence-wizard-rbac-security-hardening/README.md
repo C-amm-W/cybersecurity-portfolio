@@ -2,20 +2,22 @@
 
 ## Overview
 
-This project documents the security hardening work for the Fence Wizard application, focused on replacing legacy single-role and per-user permission workflows with a role-based access control model.
+This project documents the production security-hardening program for Fence Wizard, an internal business platform supporting multiple departments and workflows. The work evolved from an initial role-model redesign into a broader authorization assurance program covering multi-role RBAC, backend route protection, application provisioning, auditability, privacy boundaries, and regression validation.
 
-The work is aligned to the current roadmap phase: **Phase 2 – Security Hardening**.
+The work aligns with the current roadmap focus: **Governance-Aware Security Engineering and Detection Engineering Foundations**.
 
 ## Objective
 
-Build a documented, auditable access-control foundation for Fence Wizard that supports:
+Build and continuously validate an auditable access-control foundation that supports:
 
 - Multi-role RBAC assignment
-- Least-privilege access
+- Least-privilege and deny-by-default authorization
 - Effective permission visibility
-- Override controls as exceptions only
-- Audit-ready administrative workflows
-- Separation between platform access, RBAC roles, and organizational hierarchy
+- Exception-based override governance
+- Separate application provisioning and in-app authorization
+- Resource ownership and field-level privacy controls
+- Protected administrative and workflow state transitions
+- Detection-ready audit events
 
 ## Tools Used
 
@@ -26,319 +28,173 @@ Build a documented, auditable access-control foundation for Fence Wizard that su
 - GitHub
 - Cursor
 - TypeScript
+- Microsoft Entra ID concepts
 - NIST-style access-control documentation
 
-## Architecture / Setup
-
-Fence Wizard uses a staged access-control model:
+## Current Security Architecture
 
 ```mermaid
 flowchart TD
-    A[User Account] --> B[Platform Access]
-    A --> C[Assigned RBAC Roles]
-    A --> D[Org Structure]
-    C --> E[Effective Permissions Resolver]
-    F[Overrides] --> E
-    E --> G[authorize helper]
-    G --> H[Protected Routes and Actions]
-    H --> I[Audit Log]
+    A[Microsoft Identity or Local Session] --> B[Authenticated User]
+    B --> C[Application Access Registry]
+    B --> D[Assigned RBAC Roles]
+    B --> E[Organizational Context]
+    D --> F[Effective Permission Resolver]
+    G[Temporary Allow or Deny Overrides] --> F
+    C --> H[Application Entry Decision]
+    F --> I[Backend Route Authorization]
+    I --> J[Resource Ownership and Field Filtering]
+    J --> K[Guarded Workflow or Administrative Action]
+    K --> L[Audit Event and Operational Telemetry]
 ```
 
-### Access Layers
+## Access-Control Layers
 
-| Layer | Purpose | Example |
-|---|---|---|
-| Platform Access | Determines whether a user can access the application/admin area | ADMIN, STANDARD_USER |
-| Assigned Roles | Determines what business permissions a user receives | platform_admins, project_managers, pma, operator, inventory |
-| Org Structure | Defines reporting and business hierarchy | reportsTo, team, division, branch |
-| Overrides | Exception-only permission changes | temporary allow/deny |
-| Audit Log | Tracks sensitive access-control changes | role assignment, override change, PM profile edit |
-
-## RBAC Design Principles
-
-### 1. Roles Are Primary
-
-Permissions should be granted through canonical RBAC roles, not through manual per-user permission grids.
-
-Correct model:
-
-```text
-User -> Assigned Roles -> Effective Permissions -> Authorized Actions
-```
-
-Avoid:
-
-```text
-User -> Manual Permission Toggles
-```
-
-### 2. Multi-Role Support
-
-The UI and backend must not assume one user equals one role.
-
-Examples:
-
-- PMA + Operator
-- Project Manager + Equipment
-- Inventory + Purchasing
-
-### 3. Overrides Are Exceptions
-
-Overrides must be visually and operationally demoted.
-
-Rules:
-
-- Use only for temporary or unusual exceptions
-- Require a reason
-- Log all override changes
-- Show expiration where supported
-- Do not use overrides to build custom per-user roles
-
-### 4. Effective Permissions Come From Backend Resolver
-
-The UI must never calculate permissions locally.
-
-Required backend contract:
-
-```ts
-getUserPermissions(userId)
-```
-
-Expected response fields:
-
-| Field | Purpose |
+| Layer | Purpose |
 |---|---|
-| permissionKey | Canonical permission identifier |
-| allowed | true or false |
-| source | role, override, or legacy |
-| roleName | Source role when applicable |
-| overrideReason | Reason when override applies |
+| Authentication | Confirms the user identity and active session |
+| Application Provisioning | Determines which connected applications the user may enter |
+| Assigned Roles | Supplies canonical business permissions |
+| Persona or Context | Adapts experience and responsibilities without replacing authorization |
+| Effective Permissions | Resolves role grants and explicit exceptions |
+| Route Authorization | Enforces access at backend endpoints |
+| Resource Authorization | Verifies ownership or management rights for individual records |
+| Field Filtering | Prevents lower-privilege users from receiving restricted metadata |
+| Audit Logging | Records security-sensitive decisions and changes |
 
-## Admin UI Documentation
+## Implemented Controls
 
-Target admin navigation:
+### Multi-Role RBAC
 
-```text
-Accounts | Org Structure | Role Policies | Overrides | Audit Log
-```
+- Database-backed canonical roles and permissions
+- Multi-role assignment support
+- Backend effective-permission resolution
+- Permission-gated navigation and workflow actions
+- Reduced reliance on legacy single-role assumptions
+- Protected role administration and stale-write safeguards
 
-### Accounts
+### API Authorization
 
-Primary access-management workflow.
+- Centralized authorization wrappers for authenticated routes
+- Route-by-route sweeps for accidental-public endpoints
+- Explicit documentation of public, OAuth, portal, and service exceptions
+- Consistent unauthorized and forbidden response patterns
+- Backend enforcement independent of front-end visibility
 
-Must show:
+### Resource and Privacy Authorization
 
-- User identity
-- Platform access badge
-- Assigned roles as multi-role chips
-- Effective permissions summary
-- Override summary
-- Reports-to/team/branch information
-- Assignment Capacity Profile where relevant
+- Ownership checks for user-associated records
+- Management exceptions limited to authorized roles
+- Equivalent errors for missing and unauthorized records to reduce enumeration risk
+- Field-level filtering for internal notes and manager-only metadata
+- Restricted activity counts and summaries based on viewer visibility
 
-### Org Structure
+### Application Provisioning
 
-Keeps reporting hierarchy separate from RBAC roles.
+- Per-user application access registry
+- Separation between authentication, application entry, and feature permissions
+- Migration away from using one application's RBAC permissions as another application's full authorization model
+- Persona-based downstream authorization retained within the connected application
 
-Must show:
+### Protected State Changes
 
-- Reports-to relationships
-- Team/division
-- Branch
-- Manager hierarchy
+- Guarded workflow transitions
+- Concurrent-update checks before writing events or notifications
+- Prevention of stale or unauthorized links moving records backward
+- Audit correctness tied to successful state mutation
 
-### Role Policies
+## Authorization Assurance Process
 
-Read-only or controlled-editing view of role-to-permission mappings.
+The hardening program uses several assurance activities:
 
-Must show:
-
-- Role name
-- Role description
-- Permission count
-- Included permissions
-- High-risk role indicators
-
-### Overrides
-
-Exception-management view only.
-
-Required warning copy:
-
-```text
-Overrides are exceptions and should be used sparingly. Excessive overrides weaken role-based access control.
-```
-
-### Audit Log
-
-Tracks permission-sensitive events.
-
-Minimum event types:
-
-- Role assignment changed
-- Override created/updated/removed
-- PM assignment profile edited
-- Access request approved/rejected
-- High-risk action authorized
-
-## Permission Gates
-
-Each admin area should be explicitly permission-gated.
-
-| Area | View Permission | Mutation Permission |
-|---|---|---|
-| Accounts | viewDispatch or admin baseline | managePMProfiles / admin-level role assignment permission |
-| Role Policies | platform_admins or general_manager | platform_admins only |
-| Overrides | admins only | overrideAssignment |
-| Assignment Capacity Profile | assignment-related roles/admins | managePMProfiles |
-| Audit Log | admins or GM only | none; read-only |
-
-## Assignment Capacity Profile Integration
-
-The legacy standalone PM Profiles screen should be consolidated into the RBAC-first admin experience.
-
-### Rules
-
-- Do not remove the PMProfile Prisma model
-- Do not modify assignmentEngine.ts behavior
-- Do not auto-create PMProfile records
-- Reuse existing PMProfile APIs where possible
-- Preserve existing assignment failure behavior when no profiles exist
-
-### Fields
-
-| Field | Mode |
-|---|---|
-| allowedTiers | Editable |
-| specializations | Editable |
-| maxCapacity | Editable |
-| currentLoad | Read-only |
-| activeTakeoffs | Read-only |
-
-### Missing Profile Warning
-
-```text
-No assignment profile configured — takeoff assignment may fail.
-```
+1. Inventory protected routes and mutation paths.
+2. Verify authentication and permission enforcement.
+3. Test resource ownership and information filtering.
+4. Review public and service-to-service exceptions explicitly.
+5. Run adversarial reviews for disclosure, enumeration, stale-state, and race-condition issues.
+6. Add regression tests for confirmed findings.
+7. Record administrative and authorization outcomes as audit events.
 
 ## Audit Logging Requirements
 
-All mutation paths must call a centralized audit/logging wrapper.
+Security-sensitive events should capture enough context to answer who performed the action, what changed, which control authorized it, and whether the result succeeded.
 
-Minimum fields:
+Recommended fields:
 
 | Field | Description |
 |---|---|
-| actorUserId | User performing the action |
-| targetUserId | User affected by the action |
-| actionType | Role assignment, override change, approval, etc. |
-| permissionUsed | Permission required to perform action |
+| actorUserId | User or service performing the action |
+| targetUserId | User affected by an access change, when applicable |
+| actionType | Authorization, role assignment, override, workflow transition, or administrative action |
+| permissionUsed | Permission or service trust decision used |
 | entityType | Affected object type |
-| entityId | Affected object ID |
+| entityId | Affected object identifier |
+| result | Allowed, denied, failed, or completed |
+| reason | Human-readable or machine-readable decision reason |
 | timestamp | Event time |
 | before | Previous state where practical |
 | after | New state where practical |
 
-Example:
+## Current Assurance Checklist
 
-```ts
-logPermissionEvent({
-  actorUserId,
-  targetUserId,
-  permissionUsed: 'managePMProfiles',
-  actionType: 'PM_PROFILE_UPDATED',
-  entityType: 'PMProfile',
-  entityId: profileId,
-})
-```
+### Implemented
 
-## Route Enforcement Backlog
+- [x] Multi-role RBAC model
+- [x] Effective permission resolution
+- [x] Backend authorization for sensitive routes
+- [x] Protected administrative role changes
+- [x] Audit events for access-control changes
+- [x] Application access separated from in-app authorization
+- [x] Resource ownership checks in reviewed modules
+- [x] Field-level privacy filtering in reviewed modules
+- [x] Guarded workflow transitions and stale-write checks
+- [x] Route inventories and authorization documentation
 
-High-risk routes should be protected with a centralized authorization helper.
+### Ongoing
 
-Priority areas:
+- [ ] Continue authorization sweeps as new routes are added
+- [ ] Expand automated regression coverage for object-level authorization
+- [ ] Monitor override use and permission drift
+- [ ] Add detection logic for unusual role and administrative activity
+- [ ] Periodically validate application provisioning and offboarding behavior
+- [ ] Review new external portals for token, rate-limit, and state-transition safety
 
-1. Proposals
-   - lockProposal
-   - markSold
-2. Inventory
-   - manageInventory
-   - approveInventoryAdjustment
-   - postInventoryCorrection
-3. Scheduling / Dispatch
-   - manageSchedule
-   - dispatchAssign
-4. System-level actions
-   - overrideAssignment
-   - editJobNumber
+## Detection Opportunities
 
-Expected helper pattern:
+Potential detections based on the implemented telemetry:
 
-```ts
-authorize(userId, 'permission_key')
-```
-
-## Security Concepts
-
-- Least privilege
-- Separation of duties
-- Role-based access control
-- Deny-by-default authorization
-- Fail-closed security behavior
-- Auditability
-- Permission drift reduction
-- Exception governance
-- Dev/prod separation
+- Repeated authorization denials across sensitive routes
+- Sudden assignment of privileged roles
+- High-volume or long-lived overrides
+- Access attempts against resources owned by other users
+- Repeated application-access denials
+- Service-authentication failures
+- Unusual after-hours administrative activity
+- Conflicting or repeated workflow-transition attempts
 
 ## GRC Alignment
 
 | Control Area | Alignment |
 |---|---|
-| Access Control | NIST AC-2, AC-3, AC-6 |
-| Audit Logging | NIST AU-2, AU-3, AU-6 |
-| Least Privilege | NIST AC-6 |
-| Change Traceability | NIST CM-3 |
-| Risk Reduction | Reduces unauthorized access and permission drift |
+| Account Management | NIST AC-2 concepts |
+| Access Enforcement | NIST AC-3 concepts |
+| Least Privilege | NIST AC-6 concepts |
+| Audit Events | NIST AU-2 and AU-3 concepts |
+| Audit Review | NIST AU-6 concepts |
+| Change Control | NIST CM-3 concepts |
+| Identification and Authentication | NIST IA concepts |
 
-## Implementation Checklist
-
-- [ ] Replace single Operational Role UI with Assigned Roles multi-select
-- [ ] Rename Org Role column to Assigned Roles
-- [ ] Add Effective Permissions read-only panel
-- [ ] Add role source indicator: Legacy vs RBAC
-- [ ] Add Override summary as secondary workflow
-- [ ] Add warning banner for overrides
-- [ ] Integrate Assignment Capacity Profile into Accounts UI
-- [ ] Remove/retarget standalone `/admin/pm-profiles` navigation
-- [ ] Add authorization checks to mutation routes
-- [ ] Add audit logging hooks to all mutation paths
-- [ ] Inventory remaining legacy `User.role` assumptions
-- [ ] Inventory routes using email-based bypasses
-- [ ] Verify production routes fail closed
+This mapping is planning-oriented and does not claim formal assessment or certification.
 
 ## Key Takeaways
 
-- RBAC must be enforced server-side, not only represented in the UI.
-- Multi-role assignment prevents artificial single-role workarounds.
-- Overrides should exist, but only as audited exceptions.
-- Effective permissions must be resolver-driven to avoid client-side security bugs.
-- PM assignment capacity can be consolidated into the admin RBAC experience without changing the assignment engine.
+- Authentication, application provisioning, and authorization are separate security decisions.
+- Front-end visibility does not replace backend enforcement.
+- Multi-role access reduces pressure to create unmanaged per-user permission combinations.
+- Object-level authorization and field filtering are necessary even after route authorization succeeds.
+- Audit events must represent successful security decisions accurately, especially under concurrent updates.
+- Security hardening is an ongoing assurance process rather than a one-time migration.
 
 ## Public Documentation Sanitization
 
-Before sharing screenshots or writeups publicly, remove or replace:
-
-- Real emails
-- Internal URLs
-- API keys
-- Database names
-- Production hostnames
-- Customer/job identifiers
-
-Use placeholders such as:
-
-```text
-example-user@example.com
-internal system
-example database
-```
+Public artifacts must exclude real employee information, internal URLs, tokens, secrets, customer data, production hostnames, and proprietary implementation details. Sanitized diagrams and control-level summaries should be used instead.

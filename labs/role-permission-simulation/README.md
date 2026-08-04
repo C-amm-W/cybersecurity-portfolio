@@ -1,200 +1,41 @@
-# Role Permission Simulation Lab
+# Role-Permission Simulation Lab
 
-## Lab Overview
+**As of:** 2026-08-04
+**Evidence state:** `PUBLICLY_DEMONSTRATED`
+**Data classification:** Entirely synthetic; independent of private implementations.
 
-This lab simulates a role-based access control system using a multi-role permission resolver model.
+## Purpose
 
-The objective is to demonstrate:
+This runnable TypeScript lab demonstrates multi-role additive permission resolution, deny-by-default authorization, explicit-deny precedence, expiring overrides, unknown-role and unknown-permission rejection, application provisioning, object ownership, field-level filtering, fail-closed resolver behavior, and synthetic audit-event creation.
 
-- Multi-role authorization
-- Effective permission calculation
-- Override handling
-- Deny-by-default behavior
-- Fail-closed authorization
-- Auditable administrative actions
+## Requirements and commands
 
-## Security Objective
+Node.js 22.18 or newer is required for native TypeScript type stripping. TypeScript is used for static checking.
 
-Traditional per-user permission systems often lead to:
-
-- permission drift,
-- hidden escalation,
-- inconsistent access,
-- and poor auditability.
-
-This simulation demonstrates how RBAC reduces those risks.
-
-## Simulated Roles
-
-| Role | Purpose |
-|---|---|
-| platform_admins | Administrative access |
-| project_managers | Proposal/project management |
-| pma | Proposal assistant workflows |
-| operator | Dispatch and scheduling |
-| inventory | Inventory operations |
-| read_only | View-only access |
-
-## Simulated Permissions
-
-| Permission | Description |
-|---|---|
-| manageSchedule | Modify schedules |
-| dispatchAssign | Assign dispatch work |
-| editProposal | Edit proposals |
-| markSold | Mark proposals sold |
-| manageInventory | Modify inventory |
-| manageRoles | Assign/remove RBAC roles |
-| manageOverrides | Create/remove overrides |
-| viewAuditLog | View security audit logs |
-
-## Effective Permission Model
-
-```text
-Roles + Overrides = Effective Permissions
+```bash
+npm install
+npm test
+npm run typecheck
 ```
 
-### Example
+## Structure
 
-```text
-User Roles:
-- PMA
-- Operator
+- `src/` contains the synthetic resolver and layered authorization controls.
+- `data/` contains obviously synthetic users, roles, and overrides.
+- `tests/` contains runnable positive and negative security tests.
 
-Effective Permissions:
-- editProposal
-- manageSchedule
-- dispatchAssign
-```
+## Security decisions
 
-## Override Example
+1. Role permissions combine additively.
+2. Active explicit denies are evaluated after allows and take precedence.
+3. Expired overrides do not affect the role baseline.
+4. Unknown roles and resolver errors fail closed.
+5. Unknown permissions are rejected rather than silently created.
+6. Application provisioning is checked independently of feature permission.
+7. Route permission does not replace object ownership.
+8. Field filtering removes restricted values from returned objects.
+9. Every authorization result returns a synthetic audit-event representation.
 
-```text
-Override:
-DENY manageSchedule
-```
+## Limitations
 
-Effective result:
-
-```text
-manageSchedule = denied
-```
-
-## Recommended Folder Expansion
-
-Add later:
-
-```text
-labs/role-permission-simulation/
-├── resolver-example.ts
-├── sample-users.json
-├── override-scenarios.md
-├── authorization-tests.md
-└── audit-log-examples.json
-```
-
-## Example Resolver Pseudocode
-
-```ts
-function getEffectivePermissions(user) {
-  const rolePermissions = unionPermissions(user.roles)
-
-  return applyOverrides(rolePermissions, user.overrides)
-}
-```
-
-## Example Authorization Pattern
-
-```ts
-await authorize(userId, 'manageInventory')
-```
-
-## Expected Security Behaviors
-
-| Behavior | Requirement |
-|---|---|
-| Deny by default | Mandatory |
-| Fail closed | Mandatory |
-| Multi-role support | Mandatory |
-| Audit sensitive actions | Mandatory |
-| Prevent client-only authorization | Mandatory |
-
-## Attack Scenarios To Test
-
-### 1. Privilege Escalation Attempt
-
-Scenario:
-
-- User attempts admin-only action without required role.
-
-Expected:
-
-- Authorization denied
-- Audit event logged
-
----
-
-### 2. Override Abuse
-
-Scenario:
-
-- Admin repeatedly grants manual overrides.
-
-Expected:
-
-- Override activity visible
-- Audit review detects excessive exceptions
-
----
-
-### 3. Missing Authorization Coverage
-
-Scenario:
-
-- Route lacks authorize() helper.
-
-Expected:
-
-- Security review identifies route gap
-- Enforcement backlog updated
-
----
-
-### 4. Client-Side Tampering
-
-Scenario:
-
-- User manipulates front-end role state.
-
-Expected:
-
-- Backend authorization still denies access
-
-## SOC / Detection Opportunities
-
-Potential detections:
-
-- Excessive permission denied events
-- Sudden admin role assignments
-- Override spikes
-- Inventory correction anomalies
-- After-hours administrative actions
-
-## GRC Alignment
-
-| Control Area | Alignment |
-|---|---|
-| Access Control | NIST AC-2 / AC-3 / AC-6 |
-| Auditability | NIST AU-2 / AU-6 |
-| Least Privilege | NIST AC-6 |
-| Monitoring | SOC-oriented logging practices |
-
-## Portfolio Value
-
-This lab demonstrates:
-
-- Security architecture thinking
-- RBAC design understanding
-- Access-control governance
-- Defensive security engineering
-- Audit-aware system design
+This is a compact teaching artifact, not a production authorization library. It uses an in-memory model, does not persist events, and does not implement distributed clocks, database transactions, cryptographic identity, or policy administration. Its role and permission names are synthetic and do not reproduce private schemas.

@@ -1,5 +1,10 @@
 # Fence Wizard Audit Event Schema
 
+> **Document status:** Sanitized reference design; implementation coverage is governed by [Current Control Status](../current-control-status.md).
+> **As of:** 2026-08-04
+> Examples are synthetic and not production exports.
+
+
 ## Objective
 
 Define a centralized audit event schema for RBAC-sensitive actions inside Fence Wizard.
@@ -21,7 +26,7 @@ Without centralized audit logging:
 - Sensitive admin actions cannot be reconstructed
 - Incident response timelines become incomplete
 
-Audit logging is required for Phase 2 – Security Hardening.
+Audit logging expectations and implementation state are maintained in [Current Control Status](../current-control-status.md).
 
 ## Event Categories
 
@@ -100,7 +105,7 @@ interface AuditEvent {
 | editJobNumber | Yes |
 | manageRoles | Yes |
 
-## Example Event
+## Synthetic Example Event
 
 ```json
 {
@@ -138,7 +143,7 @@ await logPermissionEvent({
 })
 ```
 
-## Prisma Model Example
+## Synthetic Prisma Model Example
 
 ```prisma
 model AuditEvent {
@@ -182,9 +187,9 @@ Potential SOC detections:
 - Inventory correction anomalies
 - Sudden privilege escalation patterns
 
-## Retention Guidance
+## Illustrative Retention Planning Guidance
 
-| Event Type | Recommended Retention |
+| Event Type | Illustrative Planning Range |
 |---|---|
 | Admin RBAC events | 1–3 years |
 | Authentication failures | 90–180 days |

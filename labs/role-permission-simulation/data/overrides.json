@@ -1,0 +1,4 @@
+[
+  {"userId":"syn_user_multi","permission":"records.manage","effect":"DENY","expiresAt":"2099-01-01T00:00:00Z"},
+  {"userId":"syn_user_reader","permission":"audit.view","effect":"ALLOW","expiresAt":"2000-01-01T00:00:00Z"}
+]

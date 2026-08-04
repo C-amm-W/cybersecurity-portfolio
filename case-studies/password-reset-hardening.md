@@ -1,5 +1,17 @@
 # Fence Wizard Password Reset Hardening Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Fence Wizard |
+| Case-study status | Implemented pending additional public evidence |
+| Evidence level | `IMPLEMENTED_PENDING_PUBLIC_EVIDENCE` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Private commit and behavior review |
+| Known limitations | The cited private commit and production test results are not publicly resolvable. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 This case study documents password reset hardening work for Fence Wizard, an internal production business platform. The work focused on strengthening account recovery as an application security and identity governance workflow, not just adding a convenience feature.
@@ -22,7 +34,13 @@ Fence Wizard needed a safer account recovery flow that could support both user s
 - Validate reset tokens and reset tickets before allowing credential changes.
 - Preserve portfolio-safe evidence without exposing private implementation details.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Self-service forgot-password rate limiting.
 - Per-IP reset attempt throttling.
@@ -55,7 +73,7 @@ The hardening work created useful event categories for future review and detecti
 
 These events can help answer who initiated the action, what account was affected, when it occurred, whether the request was throttled, and whether abuse indicators were present.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Reduced manual password recovery risk.
 - Improved account recovery reliability.
@@ -64,15 +82,21 @@ These events can help answer who initiated the action, what account was affected
 - Strengthened the platform's access governance story.
 - Created evidence that supports future security documentation, access reviews, and CMMC/NIST-style control alignment.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: AppSec foundations.
-- Phase 0: Authentication and account recovery hardening.
-- Phase 0: Session security and audit logging.
-- Phase 0: Governance workflows and operational controls.
-- Phase 1 preview: Identity-aware cloud and application security.
-- Phase 2 preview: Detection-ready event design.
+Private commit and behavior review. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. The cited private commit and production test results are not publicly resolvable.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 This public case study summarizes the security controls, risk reduction, and governance value of the work without copying proprietary source code, internal routes, database details, secrets, or private company data.

@@ -1,5 +1,10 @@
 # Fence Wizard RBAC Routing Diagram
 
+> **Document status:** Current conceptual architecture.
+> **As of:** 2026-08-04
+> See [Current Control Status](current-control-status.md) for implementation and validation state.
+
+
 This document summarizes the role-based access control routing model implemented for Fence Wizard. The diagram shows how user roles, canonical permissions, overrides, backend authorization checks, and audit events work together to enforce access control.
 
 ## RBAC Permission Routing

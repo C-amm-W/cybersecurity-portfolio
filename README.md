@@ -1,73 +1,76 @@
 # Cybersecurity Portfolio — C. Wilkerson
 
-## Strategic Focus
+This portfolio presents sanitized security-engineering case studies, synthetic public evidence, and a runnable authorization lab. It distinguishes public demonstration from private implementation summaries and design-only work through the [evidence model](evidence/README.md).
 
-This portfolio documents hands-on cybersecurity work focused on governance-aware security engineering, access-control architecture, secure application design, audit logging, identity governance, privacy-aware AI workflows, and detection engineering foundations.
+## Start Here
 
-The goal is to show practical proof-of-work beyond tool familiarity: secure design decisions, authorization enforcement, operational risk reduction, adversarial review, documentation discipline, and telemetry that can support future detection engineering.
+1. **[Fence Wizard authorization hardening](case-studies/fence-wizard-rbac-governance.md)** — multi-role RBAC, backend enforcement, provisioning, object authorization, field filtering, and guarded transitions.
+2. **[Adversarial security review](case-studies/adversarial-security-review.md)** — metadata disclosure, object probing, concurrency, audit correctness, and regression-oriented remediation.
+3. **[Secure external vendor portal](case-studies/secure-external-vendor-portal.md)** — hashed and expiring tokens, explicit state-changing actions, private documents, and replay resistance.
 
-## Core Themes
-
-- Security engineering for business platforms
-- Role-based access control and permission governance
-- Least privilege and deny-by-default authorization design
-- API authentication, ownership checks, and session enforcement
-- Microsoft SSO and secure application handoff design
-- Application provisioning and persona-based access
-- Audit logging and security event visibility
-- Privacy-preserving AI workflow design
-- Adversarial security review and remediation
-- Secure external portal and token design
-- Human-governed AI automation
-- Break-glass access governance
-- Access-control regression validation
-- NIST/CMMC-style control mapping
-- Detection engineering foundations
+For verification-oriented review, continue to the [evidence index](evidence/evidence-index.md), [current control status](docs/current-control-status.md), and [runnable RBAC lab](labs/role-permission-simulation/README.md).
 
 ## Featured Case Studies
 
-| Case Study | Focus Area |
+| Case study | Evidence posture |
 |---|---|
-| [Fence Wizard RBAC Governance](case-studies/fence-wizard-rbac-governance.md) | Production RBAC migration, multi-role permissions, authorization hardening |
-| [Secure API Authorization](case-studies/secure-api-authorization.md) | Sessions, route permissions, resource ownership, field-level privacy, service trust |
-| [Microsoft SSO and Secure App Handoff](case-studies/microsoft-sso-secure-handoff.md) | Identity evolution, callback reliability, signed handoff, Azure AD migration |
-| [Application Provisioning and Persona-Based Access](case-studies/application-provisioning-persona-access.md) | Authentication, per-user app access, Persona Engine authorization boundaries |
-| [Adversarial Security Review](case-studies/adversarial-security-review.md) | Metadata leakage, object authorization, enumeration resistance, concurrency safety |
-| [Secure External Vendor Portal](case-studies/secure-external-vendor-portal.md) | Hashed tokens, rotation, second factor, guarded state changes, private documents |
-| [Password Reset Hardening](case-studies/password-reset-hardening.md) | Account recovery security, rate limiting, reset-token handling, audit telemetry |
-| [Compass Audit and Privacy Architecture](case-studies/compass-audit-privacy-architecture.md) | Audit logs, application provisioning, anonymized reviews, encryption, data minimization |
-| [Human-Governed AI Engineering Triage](case-studies/human-governed-ai-engineering-triage.md) | AI triage, duplicate detection, security escalation, plan-only automation, human approval |
-| [Permission Override Governance](case-studies/permission-override-governance.md) | Exception-based access, expiration, auditability |
-| [Break-Glass Admin Access](case-studies/break-glass-admin-access.md) | Emergency privileged access, logging, review/rotation |
-| [Access-Control Regression Checklist](case-studies/access-control-regression-checklist.md) | Secure change review, authorization validation |
-| [Audit Logging and Telemetry Design](case-studies/audit-logging-telemetry-design.md) | Security decisions, administrative events, workflow history, detection-ready logging |
+| [Fence Wizard RBAC Governance](case-studies/fence-wizard-rbac-governance.md) | Private implementation, sanitized evidence, ongoing validation |
+| [Secure API Authorization](case-studies/secure-api-authorization.md) | Private implementation, sanitized evidence, ongoing validation |
+| [Microsoft SSO and Secure App Handoff](case-studies/microsoft-sso-secure-handoff.md) | Current Microsoft Entra ID architecture plus retired handoff history |
+| [Application Provisioning and Persona Access](case-studies/application-provisioning-persona-access.md) | Private implementation, sanitized evidence |
+| [Adversarial Security Review](case-studies/adversarial-security-review.md) | Sanitized finding and validation summary |
+| [Secure External Vendor Portal](case-studies/secure-external-vendor-portal.md) | Private implementation, sanitized threat/control evidence |
+| [Password Reset Hardening](case-studies/password-reset-hardening.md) | Implemented; additional public evidence pending |
+| [Compass Audit and Privacy Architecture](case-studies/compass-audit-privacy-architecture.md) | Private implementation, synthetic privacy evidence |
+| [Human-Governed AI Engineering Triage](case-studies/human-governed-ai-engineering-triage.md) | Implemented; additional public evidence pending |
+| [Audit Logging and Telemetry Design](case-studies/audit-logging-telemetry-design.md) | Ongoing validation; detection implementation remains design-only |
+| [Break-Glass Administrative Access](case-studies/break-glass-admin-access.md) | Design only |
+
+## Technical Evidence and Architecture
+
+- [Evidence model](evidence/README.md)
+- [Evidence index](evidence/evidence-index.md)
+- [Authoritative current control status](docs/current-control-status.md)
+- [Authorization validation matrix](evidence/authorization-validation-matrix.md)
+- [Privacy field-release matrix](evidence/privacy-field-release-matrix.md)
+- [Adversarial review summary](evidence/adversarial-review-summary.md)
+- [Synthetic audit events](evidence/sanitized-audit-events.json)
+- [RBAC routing diagram](docs/fence-wizard-rbac-routing.md)
+- [Authorization matrix](docs/rbac/authorization-matrix.md)
+- [Audit-event schema](docs/audit/audit-event-schema.md)
+- [Fence Wizard hardening evidence hub](fence-wizard-rbac-security-hardening/README.md)
+- [Security architecture glossary](docs/glossary.md)
+
+## Labs
+
+- [Runnable role-permission simulation](labs/role-permission-simulation/README.md) — synthetic TypeScript implementation and negative security tests.
 
 ## Control Mappings
 
-| Mapping | Purpose |
-|---|---|
-| [NIST 800-53 Access Control Mapping](control-mappings/nist-800-53-access-control-mapping.md) | Connect RBAC and audit work to access-control concepts |
-| [CMMC Level 2 Alignment Notes](control-mappings/cmmc-level-2-alignment.md) | Planning-oriented control alignment for future compliance work |
+- [NIST SP 800-53 Access-Control Conceptual Mapping](control-mappings/nist-800-53-access-control-mapping.md)
+- [CMMC Level 2 Conceptual Alignment Notes](control-mappings/cmmc-level-2-alignment.md)
 
-## Portfolio Standard
+Both mappings are planning crosswalks only. They are not assessments, attestations, certifications, audit results, or claims of control effectiveness.
 
-Each project should answer four questions:
+## Historical and Transitional Documentation
 
-1. What risk or security problem was being addressed?
-2. What control, process, or technical safeguard was implemented?
-3. How was the safeguard validated or documented?
-4. What business or operational risk was reduced?
+- [Historical RBAC migration architecture](historical/rbac-migration-architecture.md)
+- [Historical route-enforcement inventory](historical/route-enforcement-inventory.md)
+- [SSO architecture evolution](case-studies/microsoft-sso-secure-handoff.md)
 
-## Evidence Handling Standard
+Historical documents preserve decision context but do not override [current control status](docs/current-control-status.md).
 
-Private company repositories should not be copied into this public portfolio. Case studies should use sanitized summaries, diagrams, control mappings, and evidence notes that explain the security value without exposing proprietary implementation details.
+## Contribution, Evidence, and Use
 
-AI-assisted implementation is described through the security decisions, review process, testing, and operational outcomes rather than claims that every line was manually written.
+- [Contribution and AI-assistance statement](CONTRIBUTION_AND_AI_ASSISTANCE.md)
+- [Portfolio-use notice](PORTFOLIO_USE_NOTICE.md)
 
-## Scope Note
+Private repositories are not copied into this public portfolio. Production claims identify their evidence boundary; synthetic artifacts are clearly labeled and never represented as production exports.
 
-The enterprise email and notification architecture is intentionally not included in this refresh. The framework contribution requires a separate manual authorship review before it is represented as portfolio proof-of-work.
+## Explicit Scope Exclusion
 
-## Current Identity
+The enterprise email and notification architecture is intentionally excluded. It remains pending a separate manual verification of contribution boundaries and is not represented as completed proof-of-work.
 
-Governance-aware security engineering and detection-focused operator building hardened operational platforms with cloud and AI security integration.
+## Current Focus
+
+Governance-aware security engineering: layered authorization, privacy-aware application security, auditable operations, adversarial validation, and detection-engineering foundations.

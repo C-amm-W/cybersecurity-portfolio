@@ -1,4 +1,9 @@
 # Fence Wizard RBAC Migration Architecture
+> **Historical document**
+> **Superseded:** 2026-08-04
+> **Superseding document:** [Current Control Status](../docs/current-control-status.md)
+> Status labels and roadmap phases below are preserved only to explain migration history. They are not current implementation claims.
+
 
 ## Objective
 
@@ -20,7 +25,7 @@ Centralized RBAC + effective permissions + audited exceptions
 
 ---
 
-# Legacy Architecture (Before)
+## Legacy Architecture (Before)
 
 ```mermaid
 flowchart TD
@@ -45,7 +50,7 @@ flowchart TD
 
 ---
 
-# Target RBAC Architecture (After)
+## Target RBAC Architecture (After)
 
 ```mermaid
 flowchart TD
@@ -72,7 +77,7 @@ flowchart TD
 
 ---
 
-# RBAC UI Architecture
+## RBAC UI Architecture
 
 ## Primary Navigation
 
@@ -92,7 +97,7 @@ Accounts | Org Structure | Role Policies | Overrides | Audit Log
 
 ---
 
-# Effective Permissions Flow
+## Effective Permissions Flow
 
 ```mermaid
 sequenceDiagram
@@ -112,7 +117,7 @@ sequenceDiagram
 
 ---
 
-# Override Governance Model
+## Override Governance Model
 
 ## Correct Override Usage
 
@@ -133,7 +138,7 @@ Overrides must not become:
 
 ---
 
-# PM Assignment Capacity Integration
+## PM Assignment Capacity Integration
 
 ## Migration Goal
 
@@ -148,7 +153,7 @@ Fold legacy PM profile management into the RBAC-first admin experience without c
 
 ---
 
-# Authorization Enforcement Strategy
+## Authorization Enforcement Strategy
 
 ## Standard Pattern
 
@@ -165,7 +170,7 @@ await authorize(userId, 'permission_key')
 
 ---
 
-# Migration Phases
+## Migration Phases
 
 | Phase | Focus | Status |
 |---|---|---|
@@ -177,7 +182,7 @@ await authorize(userId, 'permission_key')
 
 ---
 
-# High-Risk Migration Areas
+## High-Risk Migration Areas
 
 | Area | Risk |
 |---|---|
@@ -189,7 +194,7 @@ await authorize(userId, 'permission_key')
 
 ---
 
-# Final Target State
+## Final Target State
 
 ```mermaid
 flowchart LR

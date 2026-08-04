@@ -1,5 +1,17 @@
 # Secure External Vendor Portal Case Study
 
+| Metadata | Value |
+|---|---|
+| System | External vendor response portal |
+| Case-study status | Implemented |
+| Evidence level | `PRIVATE_IMPLEMENTATION_SANITIZED_EVIDENCE` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized threat/control review |
+| Known limitations | No token values, vendor data, private documents, routes, or production test output is public. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 This case study documents the security design of an external vendor response portal used to replace unauthenticated, state-changing email links.
@@ -23,7 +35,13 @@ The external workflow needed a stronger design that remained usable on mobile de
 - Preserve auditability for rejected and successful actions.
 - Prevent external actions from moving workflows backward.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Replaced multiple state-changing email links with one hosted portal entry point.
 - Stored only cryptographic token hashes rather than raw portal tokens.
@@ -70,7 +88,7 @@ Private storage, format validation, ownership checks, and controlled download ro
 
 The portal demonstrates how to build a limited external workflow without extending internal trust to outside users. It combines token security, interaction design, workflow guards, document protection, and auditability.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Reduced risk of automated email scanners changing business records.
 - Improved vendor usability without requiring internal accounts.
@@ -78,13 +96,21 @@ The portal demonstrates how to build a limited external workflow without extendi
 - Improved protection for vendor receipts and supporting documents.
 - Created a reusable pattern for secure external response portals.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: AppSec foundations and secure workflow design.
-- Phase 0: Session, token, and audit controls.
-- Phase 0: Operational risk reduction.
-- Phase 1 preview: Cloud-hosted application security.
+Sanitized threat/control review. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. No token values, vendor data, private documents, routes, or production test output is public.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 This case study describes the control architecture without publishing raw tokens, secrets, vendor information, internal endpoints, private documents, or proprietary workflow data.

@@ -1,4 +1,9 @@
 # Fence Wizard Route Enforcement Inventory
+> **Historical document**
+> **Superseded:** 2026-08-04
+> **Superseding document:** [Current Control Status](../docs/current-control-status.md)
+> Status labels and roadmap phases below are preserved only to explain migration history. They are not current implementation claims.
+
 
 ## Purpose
 
@@ -37,7 +42,7 @@ await authorize(userId, 'permission_key')
 | editProposal | editProposal | Medium |
 | proposal status changes | editProposal | Medium |
 
-### Required Security Controls
+### Proposal Security Controls
 
 - Server-side permission validation
 - Audit logging
@@ -54,7 +59,7 @@ await authorize(userId, 'permission_key')
 | postInventoryCorrection | postInventoryCorrection | Critical |
 | inventory edits | manageInventory | High |
 
-### Required Security Controls
+### Inventory Security Controls
 
 - Audit before/after values
 - Prevent client-only authorization
@@ -70,7 +75,7 @@ await authorize(userId, 'permission_key')
 | dispatchAssign | dispatchAssign | High |
 | dispatch reassignment | dispatchAssign | High |
 
-### Required Security Controls
+### Dispatch Security Controls
 
 - Log assignment changes
 - Restrict override capability
@@ -89,7 +94,7 @@ await authorize(userId, 'permission_key')
 | approve access request | approveAccessRequests | High |
 | edit PM profile | managePMProfiles | High |
 
-### Required Security Controls
+### Administrative Security Controls
 
 - Mandatory audit logging
 - Admin-only restrictions

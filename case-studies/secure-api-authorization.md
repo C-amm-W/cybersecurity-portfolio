@@ -1,5 +1,17 @@
 # Secure API Authorization Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Fence Wizard reviewed API families |
+| Case-study status | Implemented; ongoing validation |
+| Evidence level | `ONGOING_VALIDATION` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized authorization review |
+| Known limitations | Coverage is limited to reviewed route families; private routes and tests are excluded. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 This case study documents application-security work focused on protecting backend API routes that handle customer, operational, analytics, administrative, and business-sensitive data.
@@ -52,7 +64,13 @@ Connected application workflows use authenticated internal requests, signed or s
 
 Sensitive workflow updates use permission checks, status guards, and concurrency protections so stale requests cannot silently overwrite newer decisions or produce false audit events.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Session enforcement for sensitive customer, import, analytics, and operational APIs.
 - Centralized permission-based authorization wrappers.
@@ -70,7 +88,7 @@ Sensitive workflow updates use permission checks, status guards, and concurrency
 
 This work demonstrates defense in depth for application authorization. Access decisions are not treated as one yes-or-no check. Authentication, permission, ownership, field visibility, service trust, and workflow state are evaluated at the layer where each decision belongs.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Reduced risk of unauthorized customer and employee data access.
 - Reduced risk of internal-note and administrative metadata disclosure.
@@ -79,14 +97,21 @@ This work demonstrates defense in depth for application authorization. Access de
 - Strengthened evidence for access-control reviews and future NIST/CMMC-style documentation.
 - Improved trust in cross-application and operational workflows.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: AppSec foundations.
-- Phase 0: Authentication and API security.
-- Phase 0: Authorization enforcement.
-- Phase 0: Audit logging and governance.
-- Phase 1 preview: Identity-aware application and cloud security.
+Sanitized authorization review. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. Coverage is limited to reviewed route families; private routes and tests are excluded.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 The public case study describes the security model, control patterns, and risk reduction without exposing private routes, source code, customer data, employee records, secrets, or internal identifiers.

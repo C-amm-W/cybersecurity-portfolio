@@ -1,5 +1,17 @@
 # Adversarial Security Review Case Study
 
+| Metadata | Value |
+|---|---|
+| System | Fence Wizard reviewed modules |
+| Case-study status | ONGOING_VALIDATION |
+| Evidence level | `PRIVATE_IMPLEMENTATION_SANITIZED_EVIDENCE` |
+| As-of date | 2026-08-04 |
+| Architecture | Current architecture |
+| Validation status | Sanitized manual review and regression summary |
+| Known limitations | No proprietary findings, routes, or test output is public. |
+
+Evidence-state definitions are maintained in [the evidence model](../evidence/README.md), and current implementation status is governed by [Current Control Status](../docs/current-control-status.md).
+
 ## Summary
 
 This case study documents an adversarial review of a production support and asset-management module. The review focused on how legitimate application features could unintentionally expose private metadata, permit object probing, create inconsistent authorization outcomes, or record misleading events during concurrent updates.
@@ -57,7 +69,13 @@ A stale request could conflict with a manager's newer action. Without guarded up
 
 Slow responses and stale component state could display or act on the wrong record if views were not remounted or refreshed correctly.
 
-## Controls Implemented
+## My Contribution and Validation
+
+I identified or clarified security requirements, defined expected and adversarial behavior, directed AI-assisted implementation revisions where applicable, reviewed changes, tested acceptance criteria, documented outcomes, and coordinated adoption or deployment within my supported contribution boundary. I do not claim sole manual authorship, and private implementation code is not included.
+
+## Controls and Evidence Basis
+
+The controls below are reported from the evidence level in the metadata. They are not presented as publicly demonstrated unless linked to a runnable or inspectable public artifact.
 
 - Filtered internal-note events from unauthorized activity feeds.
 - Counted only comments visible to the requesting user.
@@ -84,7 +102,7 @@ The review shows that authorization must be evaluated at several levels:
 
 It also demonstrates that audit integrity is part of security. A misleading audit event can harm investigations even when the underlying data remains protected.
 
-## Business Impact
+## Expected Security and Business Benefit
 
 - Reduced privacy leakage within internal support workflows.
 - Reduced risk of unauthorized asset discovery or association.
@@ -93,13 +111,21 @@ It also demonstrates that audit integrity is part of security. A misleading audi
 - Increased confidence in using the module across multiple departments.
 - Created reusable review patterns for other production features.
 
-## Roadmap Alignment
+## Validation Method
 
-- Phase 0: AppSec foundations and authorization enforcement.
-- Phase 0: Audit logging and operational controls.
-- Phase 0: Risk identification and remediation.
-- Phase 2 preview: Adversary-informed detection and validation.
+Sanitized manual review and regression summary. Relevant public evidence is indexed in [the evidence index](../evidence/evidence-index.md); synthetic artifacts demonstrate expected control behavior without reproducing private code.
 
+## Sanitized Evidence
+
+The public evidence is limited to portfolio-safe documentation, synthetic matrices, and the independent runnable lab. No production export is included.
+
+## Outcome and Limitations
+
+Described risk reductions are expected security benefits unless the text explicitly identifies an observed result. No proprietary findings, routes, or test output is public.
+
+## Status Authority
+
+Legacy roadmap phase labels are superseded by [Current Control Status](../docs/current-control-status.md).
 ## Portfolio-Safe Evidence Handling
 
 This case study presents sanitized security findings and control patterns without exposing private source code, employee notes, ticket contents, asset identifiers, or internal company records.
